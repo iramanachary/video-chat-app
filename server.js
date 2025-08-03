@@ -15,14 +15,14 @@ const io = socketIo(server, {
 
 
 io.on('connection', (socket)=>{
-    // console.log('Socket connected :', socket.id);
+    console.log('Socket connected :', socket.id);
     socket.on('joinRoom', (roomID) => {
         const userData = rooms.get(roomID);
         if (userData) {
             userData.socketId = socket.id;
             rooms.set(roomID, userData);
             socket.join(roomID);
-            // console.log(`${userData.username} joined room ${roomID}`);
+            console.log(`${userData.username} joined room ${roomID}`);
         }
     });
 

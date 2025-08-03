@@ -469,7 +469,10 @@
     <script>
         const socket = io('https://video-chat-app-rcqd.onrender.com');
         const roomID = "<%= id %>";
-        socket.emit('joinRoom', roomID);
+        socket.on('connect', () => {
+            socket.emit('joinRoom', roomID);
+            if (userID) fetchChatHistory(userID);
+        });
 
         let usersList = [];
         async function fetchUsers() {
